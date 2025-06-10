@@ -1,0 +1,52 @@
+ <div className="px-6">
+          <nav className="hidden lg:flex items-center justify-center gap-1 py-3">
+            <Dropdown
+              label="Nosotros"
+              icon="user"
+              items={[
+                "Información",
+                "Misión y Visión",
+                "Historia",
+                "Contáctanos",
+                "Plana Docente",
+                "Eventos",
+                "El Director",
+              ]}
+            />
+            <Dropdown
+              label="Programas"
+              icon="school"
+              items={["Administración", "Computación", "Contabilidad"]}
+            />
+            <Dropdown
+              label="Admisión"
+              icon="book"
+              items={["Admisión 2026", "Matrícula"]}
+            />
+            <Dropdown
+              label="Trámites"
+              icon="file-alt"
+              items={[
+                "TUPA",
+                "Mesa de Partes",
+                "Doc de Gestión",
+                "Estadísticas",
+              ]}
+            />
+            <Dropdown
+              label="Servicios"
+              icon="globe"
+              items={[
+                "Biblioteca Digital",
+                "Intranet",
+                "Correo Institucional",
+                "Aula Virtual",
+                "Bienestar y Empleabilidad",
+                "Bolsa Laboral",
+              ]}
+            />
+            <SimpleLink label="Investigación" icon="flask" />
+            <SimpleLink label="Jaguar Soft" icon="laptop-code" />
+            <SimpleLink label="Comunicados" icon="bullhorn" />
+          </nav>
+        </div>
