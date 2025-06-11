@@ -1,11 +1,20 @@
 import React from "react";
-import { DirectorWords, HomeCarousel } from "@/components/index.js";
+import {
+  CountComponent,
+  DirectorWords,
+  HomeCarousel,
+  NoveltiesEvents,
+  CareersCards,
+} from "@/components";
 
 export const Home = () => {
   return (
     <div>
       <HomeCarousel />
       <DirectorWords />
+      <CountComponent />
+      <CareersCards />
+      <NoveltiesEvents />
     </div>
   );
 };

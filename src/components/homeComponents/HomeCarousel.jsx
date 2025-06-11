@@ -40,11 +40,11 @@ export function HomeCarousel() {
         <CarouselContent>
           {slides.map((slide) => (
             <CarouselItem key={slide.id}>
-              <div className="relative md:h-[710px] h-[300px] w-full">
+              <div className=" md:h-[710px] h-[180px] w-full">
                 <img
                   src={slide.image}
                   alt="item"
-                  className="absolute inset-0 w-full h-[300px] md:h-[710px]  object-contain bg-black"
+                  className=" inset-0 w-full h-[180px] md:h-[710px] bg-black"
                 />
               </div>
             </CarouselItem>
