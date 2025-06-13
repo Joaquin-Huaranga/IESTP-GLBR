@@ -5,6 +5,7 @@ import {
   HomeCarousel,
   NoveltiesEvents,
   CareersCards,
+  VideosCards,
 } from "@/components";
 
 export const Home = () => {
@@ -15,6 +16,7 @@ export const Home = () => {
       <CountComponent />
       <CareersCards />
       <NoveltiesEvents />
+      <VideosCards />
     </div>
   );
 };

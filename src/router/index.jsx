@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import { BaseLayout } from "../components/layout/BaseLayout.jsx";
-import { Error404, Home } from "../pages/index.js";
+import { BaseLayout } from "@/components/index.js";
+import { Error404, Home, Careers } from "../pages/index.js";
 
 export const Router = () => {
   return (
@@ -12,6 +12,15 @@ export const Router = () => {
         element={
           <BaseLayout>
             <Home />
+          </BaseLayout>
+        }
+      />
+      <Route
+        exact
+        path="/careers/:type"
+        element={
+          <BaseLayout>
+            <Careers />
           </BaseLayout>
         }
       />
