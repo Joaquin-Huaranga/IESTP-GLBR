@@ -16,10 +16,13 @@ import {
   faChevronDown,
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 export const HeaderLayout = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -65,6 +68,7 @@ export const HeaderLayout = () => {
         <div className="flex justify-between items-center px-6 border-b border-gray-100">
           <div className="flex items-center gap-4 group">
             <img
+              onClick={() => navigate("/")}
               src={GildaLogo}
               alt="Logo Instituto"
               className={`transition-all duration-500 ease-in-out ${
@@ -156,19 +160,57 @@ export const HeaderLayout = () => {
               label="Nosotros"
               icon="user"
               items={[
-                "Información",
-                "Misión y Visión",
-                "Historia",
-                "Contáctanos",
-                "Plana Docente",
-                "Eventos",
-                "El Director",
+                {
+                  label: "Informacion",
+                  route: "/about-us/info",
+                },
+                {
+                  label: "Mision y Vision",
+                  route: "/about-us/mission-vision",
+                },
+                {
+                  label: "Historia",
+                  route: "/about-us/history",
+                },
               ]}
             />
             <Dropdown
               label="Programas"
               icon="school"
-              items={["Administración", "Computación", "Contabilidad"]}
+              items={[
+                {
+                  label: "Construcción Civil",
+                  route: "/careers/civil-construction",
+                },
+                {
+                  label: "Contabilidad",
+                  route: "/careers/accounting",
+                },
+                {
+                  label: "Desarrollo de Sistemas de Información",
+                  route: "/careers/information-systems",
+                },
+                {
+                  label: "Electricidad Industrial",
+                  route: "/careers/electricity",
+                },
+                {
+                  label: "Electrónica Industrial",
+                  route: "/careers/electronics",
+                },
+                {
+                  label: "Gestión Administrativa",
+                  route: "/careers/administrative-management",
+                },
+                {
+                  label: "Mecánica de Producción Industrial",
+                  route: "/careers/mechanics",
+                },
+                {
+                  label: "Mecatrónica Automotriz",
+                  route: "/careers/mechatronics",
+                },
+              ]}
             />
             <Dropdown
               label="Admisión"
@@ -263,7 +305,40 @@ const MobileMenu = ({ closeMenu }) => {
         <MobileDropdown
           label="Programas"
           icon="school"
-          items={["Administración", "Computación", "Contabilidad"]}
+          items={[
+            {
+              label: "Construcción Civil",
+              route: "/careers/civil-construction",
+            },
+            {
+              label: "Contabilidad",
+              route: "/careers/accounting",
+            },
+            {
+              label: "Desarrollo de Sistemas de Información",
+              route: "/careers/information-systems",
+            },
+            {
+              label: "Electricidad Industrial",
+              route: "/careers/electricity",
+            },
+            {
+              label: "Electrónica Industrial",
+              route: "/careers/electronics",
+            },
+            {
+              label: "Gestión Administrativa",
+              route: "/careers/administrative-management",
+            },
+            {
+              label: "Mecánica de Producción Industrial",
+              route: "/careers/mechanics",
+            },
+            {
+              label: "Mecatrónica Automotriz",
+              route: "/careers/mechatronics",
+            },
+          ]}
           isOpen={openDropdown === "Programas"}
           toggle={() => toggleDropdown("Programas")}
           closeMenu={closeMenu}
@@ -319,39 +394,46 @@ const MobileMenu = ({ closeMenu }) => {
   );
 };
 
-const MobileDropdown = ({ label, icon, items, isOpen, toggle, closeMenu }) => (
-  <div className="border-b border-gray-100">
-    <Button
-      variant="ghost"
-      className="w-full flex justify-between items-center py-3 px-0 text-gray-700"
-      onClick={toggle}
-    >
-      <div className="flex items-center gap-2">
-        <FontAwesomeIcon icon={["fas", icon]} className="text-indigo-600" />
-        <span className="font-medium">{label}</span>
-      </div>
-      <FontAwesomeIcon
-        icon={faChevronDown}
-        className={`text-xs text-gray-400 transition-transform ${isOpen ? "rotate-180" : ""}`}
-      />
-    </Button>
+const MobileDropdown = ({ label, icon, items, isOpen, toggle, closeMenu }) => {
+  const navigate = useNavigate();
 
-    {isOpen && (
-      <div className="pl-8 pr-2 py-2 space-y-2">
-        {items.map((item, i) => (
-          <Button
-            key={i}
-            variant="ghost"
-            className="w-full text-left justify-start py-2 px-0 text-gray-600 hover:text-indigo-600"
-            onClick={closeMenu}
-          >
-            {item}
-          </Button>
-        ))}
-      </div>
-    )}
-  </div>
-);
+  return (
+    <div className="border-b border-gray-100">
+      <Button
+        variant="ghost"
+        className="w-full flex justify-between items-center py-3 px-0 text-gray-700"
+        onClick={toggle}
+      >
+        <div className="flex items-center gap-2">
+          <FontAwesomeIcon icon={["fas", icon]} className="text-indigo-600" />
+          <span className="font-medium">{label}</span>
+        </div>
+        <FontAwesomeIcon
+          icon={faChevronDown}
+          className={`text-xs text-gray-400 transition-transform ${isOpen ? "rotate-180" : ""}`}
+        />
+      </Button>
+
+      {isOpen && (
+        <div className="pl-8 pr-2 py-2 space-y-2">
+          {items.map((item, i) => (
+            <Button
+              key={i}
+              variant="ghost"
+              className="w-full text-left justify-start py-2 px-0 text-gray-600 hover:text-indigo-600"
+              onClick={() => {
+                navigate(item.route);
+                closeMenu();
+              }}
+            >
+              {item.label}
+            </Button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
 
 const MobileSimpleLink = ({ label, icon, closeMenu }) => (
   <Button
@@ -364,36 +446,41 @@ const MobileSimpleLink = ({ label, icon, closeMenu }) => (
   </Button>
 );
 
-const Dropdown = ({ label, icon, items }) => (
-  <DropdownMenu>
-    <DropdownMenuTrigger asChild>
-      <Button
-        variant="ghost"
-        className="flex items-center gap-2 px-4 py-3 text-gray-700 rounded-none transition-all duration-300 border-b-2 border-transparent hover:border-indigo-400"
-      >
-        <FontAwesomeIcon icon={["fas", icon]} className="text-indigo-600" />
-        <span className="font-medium text-sm">{label}</span>
-        <FontAwesomeIcon
-          icon="chevron-down"
-          className="text-xs text-gray-400 ml-1"
-        />
-      </Button>
-    </DropdownMenuTrigger>
-    <DropdownMenuContent
-      className="min-w-[240px] rounded-lg shadow-xl border border-gray-100 mt-1 p-1.5"
-      align="center"
-    >
-      {items.map((item, i) => (
-        <DropdownMenuItem
-          key={i}
-          className="px-4 py-2.5 text-gray-700 hover:bg-indigo-50 rounded-md cursor-pointer transition-colors duration-200 text-sm"
+const Dropdown = ({ label, icon, items }) => {
+  const navigate = useNavigate();
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button
+          variant="ghost"
+          className="flex items-center gap-2 px-4 py-3 text-gray-700 rounded-none transition-all duration-300 border-b-2 border-transparent hover:border-indigo-400"
         >
-          {item}
-        </DropdownMenuItem>
-      ))}
-    </DropdownMenuContent>
-  </DropdownMenu>
-);
+          <FontAwesomeIcon icon={["fas", icon]} className="text-indigo-600" />
+          <span className="font-medium text-sm">{label}</span>
+          <FontAwesomeIcon
+            icon="chevron-down"
+            className="text-xs text-gray-400 ml-1"
+          />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent
+        className="min-w-[240px] rounded-lg shadow-xl border border-gray-100 mt-1 p-1.5"
+        align="center"
+      >
+        {items.map((item, i) => (
+          <DropdownMenuItem
+            key={i}
+            onClick={() => navigate(item.route)}
+            className="px-4 py-2.5 text-gray-700 hover:bg-indigo-50 rounded-md cursor-pointer transition-colors duration-200 text-sm"
+          >
+            {item.label}
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+};
 
 const SimpleLink = ({ label, icon }) => (
   <Button

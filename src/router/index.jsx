@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { BaseLayout } from "@/components/index.js";
-import { Error404, Home, Careers } from "../pages/index.js";
+import { Error404, Home, Careers, AboutUs } from "../pages/index.js";
 
 export const Router = () => {
   return (
@@ -26,13 +26,14 @@ export const Router = () => {
       />
       <Route
         exact
-        path="*"
+        path="/about-us/:infoType"
         element={
           <BaseLayout>
-            <Error404 />
+            <AboutUs />
           </BaseLayout>
         }
       />
+      <Route exact path="*" element={<Error404 />} />
     </Routes>
   );
 };

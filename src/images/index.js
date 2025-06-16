@@ -19,6 +19,16 @@ export { default as ElectronicaImageCard } from "./careers-images/electronica.we
 export { default as MecanicaImageCard } from "./careers-images/mecanica.webp";
 export { default as MecatronicaImageCard } from "./careers-images/mecatronica.webp";
 
+//careers PDFs
+export { default as ContabilidadPDF } from "./careersPDF/contabilidad.pdf";
+export { default as CivilPDF } from "./careersPDF/civil.pdf";
+export { default as DesarrolloPDF } from "./careersPDF/desarrollo.pdf";
+export { default as ElectricidadPDF } from "./careersPDF/electricidad.pdf";
+export { default as GestionPDF } from "./careersPDF/gestion.pdf";
+export { default as ElectronicaPDF } from "./careersPDF/electronica.pdf";
+export { default as MecanicaPDF } from "./careersPDF/produccion.pdf";
+export { default as MecatronicaPDF } from "./careersPDF/mecatronica.pdf";
+
 ////Novelty and Event
 
 //digital laboratory
