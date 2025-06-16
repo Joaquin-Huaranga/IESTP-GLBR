@@ -5,7 +5,6 @@ import {
   faRocket,
   faHome,
   faArrowLeft,
-  faEnvelope,
 } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
