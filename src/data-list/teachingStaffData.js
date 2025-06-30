@@ -22,6 +22,7 @@ import {
 export const teachersData = [
   {
     type: "administrative-management",
+    title: "Gestión Administrativa",
     teachers: [
       {
         image: AdministrativeManagementTeacher1,
@@ -47,6 +48,7 @@ export const teachersData = [
   },
   {
     type: "information-systems",
+    title: "Desarrollo de Sistemas de la Información",
     teachers: [
       {
         image: InformationSystemsTeacher1,
@@ -72,6 +74,7 @@ export const teachersData = [
   },
   {
     type: "accounting",
+    title: "Contabilidad",
     teachers: [
       {
         image: AccountingTeacher1,
@@ -82,6 +85,7 @@ export const teachersData = [
   },
   {
     type: "civil-construction",
+    title: "Contrucción Civil",
     teachers: [
       {
         image: CivilConstructionTeacher1,
@@ -92,10 +96,11 @@ export const teachersData = [
   },
   {
     type: "electronics",
+    title: "Electrónica Industrial",
     teachers: [
       {
         image: ElectronicsTeacher1,
-        name: "Universidad Nacional Federico Villarreal",
+        name: "Lic. Huailla Atao Delia",
         college: "Universidad Nacional Federico Villarreal",
       },
       {
@@ -112,6 +117,7 @@ export const teachersData = [
   },
   {
     type: "electricity",
+    title: "Electricidad Industrial",
     teachers: [
       {
         image: ElectricityTeacher1,
@@ -122,6 +128,7 @@ export const teachersData = [
   },
   {
     type: "mechanics",
+    title: "Mecánica de Producción Industrial",
     teachers: [
       {
         image: MechanicsTeacher1,
@@ -132,6 +139,7 @@ export const teachersData = [
   },
   {
     type: "mechatronics",
+    title: "Mecatrónica Automotriz",
     teachers: [
       {
         image: MechatronicsTeacher1,

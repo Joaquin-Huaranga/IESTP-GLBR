@@ -37,7 +37,7 @@ export const TeachingStaff = () => {
               variants={fadeInUp}
               custom={0}
             >
-              {formatTitle(section.type)}
+              {section.title}
             </motion.h3>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-10">
