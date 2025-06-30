@@ -11,9 +11,6 @@ const fadeInUp = {
   }),
 };
 
-const formatTitle = (type) =>
-  type.replace(/-/g, " ").replace(/\b\w/g, (char) => char.toUpperCase());
-
 export const TeachingStaff = () => {
   return (
     <section className="w-full bg-gradient-to-b from-blue-50 via-white to-blue-100 py-20 px-6 md:px-20">
