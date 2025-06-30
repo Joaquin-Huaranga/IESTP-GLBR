@@ -48,11 +48,24 @@ export const HeaderLayout = () => {
             willChange: "transform, opacity, max-height",
           }}
         >
-          <Button className="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold py-1.5 px-4 rounded-full shadow-sm transition-all">
+          <Button
+            onClick={() =>
+              window.open(
+                "https://docs.google.com/forms/d/e/1FAIpQLSfU5F1aClHEzOmKZmtMw-7ygtw1sZAw6xrH0BdwU2_b884DeA/viewform",
+                "_blank",
+              )
+            }
+            className="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold py-1.5 px-4 rounded-full shadow-sm transition-all"
+          >
             <FontAwesomeIcon icon="user-graduate" className="mr-2" />
             Seguimiento de Egresados
           </Button>
-          <Button className="bg-red-600 hover:bg-red-700 text-white text-xs font-bold py-1.5 px-4 rounded-full shadow-sm transition-all">
+          <Button
+            onClick={() =>
+              window.open("https://centroderecursosies.drelm.gob.pe/", "_blank")
+            }
+            className="bg-red-600 hover:bg-red-700 text-white text-xs font-bold py-1.5 px-4 rounded-full shadow-sm transition-all"
+          >
             <FontAwesomeIcon icon="calendar-alt" className="mr-2" />
             Biblioteca Digital
           </Button>
@@ -60,7 +73,15 @@ export const HeaderLayout = () => {
             <FontAwesomeIcon icon="book-open" className="mr-2" />
             Correo Institucional
           </Button>
-          <Button className="bg-green-600 hover:bg-green-700 text-white text-xs font-bold py-1.5 px-4 rounded-full shadow-sm transition-all">
+          <Button
+            onClick={() =>
+              window.open(
+                "https://virtual.iestpgildaballivian.edu.pe/",
+                "_blank",
+              )
+            }
+            className="bg-green-600 hover:bg-green-700 text-white text-xs font-bold py-1.5 px-4 rounded-full shadow-sm transition-all"
+          >
             <FontAwesomeIcon icon="laptop" className="mr-2" />
             Aula Virtual
           </Button>
@@ -172,6 +193,14 @@ export const HeaderLayout = () => {
                   label: "Historia",
                   route: "/about-us/history",
                 },
+                {
+                  label: "Contactanos",
+                  route: "/about-us/contact-us",
+                },
+                {
+                  label: "Plana Docente",
+                  route: "/about-us/teaching-staff",
+                },
               ]}
             />
             <Dropdown
@@ -267,11 +296,24 @@ const MobileMenu = ({ closeMenu }) => {
         </div>
       </div>
       <div className="grid grid-cols-2 gap-3 p-4">
-        <Button className="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold py-2 px-3 rounded-full shadow-sm">
+        <Button
+          onClick={() =>
+            window.open(
+              "https://docs.google.com/forms/d/e/1FAIpQLSfU5F1aClHEzOmKZmtMw-7ygtw1sZAw6xrH0BdwU2_b884DeA/viewform",
+              "_blank",
+            )
+          }
+          className="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold py-2 px-3 rounded-full shadow-sm"
+        >
           <FontAwesomeIcon icon="user-graduate" className="mr-1" />
           Seguimiento
         </Button>
-        <Button className="bg-red-600 hover:bg-red-700 text-white text-xs font-bold py-2 px-3 rounded-full shadow-sm">
+        <Button
+          onClick={() =>
+            window.open("https://centroderecursosies.drelm.gob.pe/", "_blank")
+          }
+          className="bg-red-600 hover:bg-red-700 text-white text-xs font-bold py-2 px-3 rounded-full shadow-sm"
+        >
           <FontAwesomeIcon icon="calendar-alt" className="mr-1" />
           Biblioteca
         </Button>
@@ -279,7 +321,12 @@ const MobileMenu = ({ closeMenu }) => {
           <FontAwesomeIcon icon="book-open" className="mr-1" />
           Correo
         </Button>
-        <Button className="bg-green-600 hover:bg-green-700 text-white text-xs font-bold py-2 px-3 rounded-full shadow-sm">
+        <Button
+          onClick={() =>
+            window.open("https://virtual.iestpgildaballivian.edu.pe/", "_blank")
+          }
+          className="bg-green-600 hover:bg-green-700 text-white text-xs font-bold py-2 px-3 rounded-full shadow-sm"
+        >
           <FontAwesomeIcon icon="laptop" className="mr-1" />
           Aula Virtual
         </Button>
@@ -290,13 +337,26 @@ const MobileMenu = ({ closeMenu }) => {
           label="Nosotros"
           icon="user"
           items={[
-            "Información",
-            "Misión y Visión",
-            "Historia",
-            "Contáctanos",
-            "Plana Docente",
-            "Eventos",
-            "El Director",
+            {
+              label: "Informacion",
+              route: "/about-us/info",
+            },
+            {
+              label: "Mision y Vision",
+              route: "/about-us/mission-vision",
+            },
+            {
+              label: "Historia",
+              route: "/about-us/history",
+            },
+            {
+              label: "Contactanos",
+              route: "/about-us/contact-us",
+            },
+            {
+              label: "Plana Docente",
+              route: "/about-us/teaching-staff",
+            },
           ]}
           isOpen={openDropdown === "Nosotros"}
           toggle={() => toggleDropdown("Nosotros")}

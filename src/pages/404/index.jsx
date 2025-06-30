@@ -65,7 +65,7 @@ export const Error404 = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="bg-purple-50 rounded-lg p-4 cursor-pointer transition-all hover:bg-purple-100"
-              onClick={() => navigate(-1)}
+              onClick={() => navigate(-1) || navigate("/")}
             >
               <FontAwesomeIcon
                 icon={faArrowLeft}

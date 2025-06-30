@@ -16,6 +16,170 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
 
+export const AboutUs = () => {
+  const { infoType } = useParams();
+  const aboutUs = useMemo(
+    () => aboutUsData.find((item) => item.infoType === infoType),
+    [infoType],
+  );
+
+  if (!aboutUs) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100">
+        <motion.div
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          className="text-center p-8 bg-white rounded-2xl shadow-xl max-w-md mx-auto border border-gray-100"
+        >
+          <h1 className="text-2xl font-bold text-red-600 mb-4">
+            Información no encontrada
+          </h1>
+          <p className="text-gray-600 mb-6">
+            La sección que buscas no está disponible.
+          </p>
+          <motion.div
+            animate={{
+              rotate: [0, 5, -5, 0],
+            }}
+            transition={{
+              repeat: Infinity,
+              duration: 2,
+              repeatType: "reverse",
+            }}
+          >
+            <FontAwesomeIcon
+              icon={faRocket}
+              className="text-gray-400 text-3xl"
+            />
+          </motion.div>
+        </motion.div>
+      </div>
+    );
+  }
+  const renderContent = (data) => {
+    return data.map((item, index) => {
+      if (Array.isArray(item)) {
+        return (
+          <ul key={index} className="space-y-2">
+            {item.map((point, i) => (
+              <li key={i} className="flex items-start">
+                <FontAwesomeIcon
+                  icon={faCheckCircle}
+                  className="text-green-500 mt-1 mr-2 text-sm"
+                />
+                <span>{point}</span>
+              </li>
+            ))}
+          </ul>
+        );
+      } else if (typeof item === "object") {
+        if (item.items) {
+          return (
+            <ul key={index} className="space-y-2">
+              {item.items.map((point, i) => (
+                <li key={i} className="flex items-start">
+                  <FontAwesomeIcon
+                    icon={faCheckCircle}
+                    className="text-green-500 mt-1 mr-2 text-sm"
+                  />
+                  <span>{point}</span>
+                </li>
+              ))}
+            </ul>
+          );
+        } else if (item.carreras) {
+          return (
+            <div
+              key={index}
+              className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4"
+            >
+              {item.carreras.map((carrera, i) => (
+                <CareerCard
+                  key={i}
+                  nombre={carrera.nombre}
+                  recursos={carrera.recursos}
+                />
+              ))}
+            </div>
+          );
+        } else if (item.timeline) {
+          return (
+            <div key={index} className="mt-6">
+              {item.timeline.map((event, i) => (
+                <TimelineEvent key={i} year={event.year} event={event.event} />
+              ))}
+            </div>
+          );
+        } else if (item.bio) {
+          return <BioCard key={index} bio={item.bio} />;
+        }
+      }
+      return (
+        <p key={index} className="mb-4 text-gray-700 leading-relaxed">
+          {item}
+        </p>
+      );
+    });
+  };
+
+  const getIcon = (title) => {
+    const iconMap = {
+      "¿Quiénes somos?": faBuilding,
+      "Nuestra oferta académica": faBookOpen,
+      Mision: faBullseye,
+      Vision: faEye,
+      "Nuestra Historia": faHistory,
+      "Gilda Liliana Ballivián Rosado": faUserGraduate,
+    };
+    return iconMap[title] || faLightbulb;
+  };
+
+  const getPageTitle = () => {
+    const titles = {
+      info: "Conoce Nuestra Institución",
+      "mission-vision": "Nuestra Misión y Visión",
+      history: "Nuestra Historia",
+    };
+    return titles[infoType] || "Sobre Nosotros";
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          className="text-center mb-16"
+        >
+          <motion.h1
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 to-indigo-700 bg-clip-text text-transparent mb-4"
+          >
+            {getPageTitle()}
+          </motion.h1>
+          <motion.div
+            initial={{ width: 0 }}
+            animate={{ width: "120px" }}
+            transition={{ delay: 0.3, duration: 0.5 }}
+            className="h-1 bg-gradient-to-r from-blue-400 to-indigo-500 mx-auto rounded-full"
+          ></motion.div>
+        </motion.div>
+
+        <div className="grid grid-cols-1 gap-10">
+          {aboutUs.data.map((item, index) => (
+            <InfoCard key={index} icon={getIcon(item.title)} title={item.title}>
+              <div className="space-y-4">{renderContent(item.description)}</div>
+            </InfoCard>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const InfoCard = React.memo(({ icon, title, children }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
@@ -83,171 +247,3 @@ const BioCard = ({ bio }) => (
     </ul>
   </div>
 );
-
-export const AboutUs = () => {
-  const { infoType } = useParams();
-  const aboutUs = useMemo(
-    () => aboutUsData.find((item) => item.infoType === infoType),
-    [infoType],
-  );
-
-  if (!aboutUs) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100">
-        <motion.div
-          initial={{ scale: 0.9, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          className="text-center p-8 bg-white rounded-2xl shadow-xl max-w-md mx-auto border border-gray-100"
-        >
-          <h1 className="text-2xl font-bold text-red-600 mb-4">
-            Información no encontrada
-          </h1>
-          <p className="text-gray-600 mb-6">
-            La sección que buscas no está disponible.
-          </p>
-          <motion.div
-            animate={{
-              rotate: [0, 5, -5, 0],
-            }}
-            transition={{
-              repeat: Infinity,
-              duration: 2,
-              repeatType: "reverse",
-            }}
-          >
-            <FontAwesomeIcon
-              icon={faRocket}
-              className="text-gray-400 text-3xl"
-            />
-          </motion.div>
-        </motion.div>
-      </div>
-    );
-  }
-
-  // Optimized content rendering
-  const renderContent = (data) => {
-    return data.map((item, index) => {
-      if (Array.isArray(item)) {
-        return (
-          <ul key={index} className="space-y-2">
-            {item.map((point, i) => (
-              <li key={i} className="flex items-start">
-                <FontAwesomeIcon
-                  icon={faCheckCircle}
-                  className="text-green-500 mt-1 mr-2 text-sm"
-                />
-                <span>{point}</span>
-              </li>
-            ))}
-          </ul>
-        );
-      } else if (typeof item === "object") {
-        if (item.items) {
-          return (
-            <ul key={index} className="space-y-2">
-              {item.items.map((point, i) => (
-                <li key={i} className="flex items-start">
-                  <FontAwesomeIcon
-                    icon={faCheckCircle}
-                    className="text-green-500 mt-1 mr-2 text-sm"
-                  />
-                  <span>{point}</span>
-                </li>
-              ))}
-            </ul>
-          );
-        } else if (item.carreras) {
-          return (
-            <div
-              key={index}
-              className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4"
-            >
-              {item.carreras.map((carrera, i) => (
-                <CareerCard
-                  key={i}
-                  nombre={carrera.nombre}
-                  recursos={carrera.recursos}
-                />
-              ))}
-            </div>
-          );
-        } else if (item.timeline) {
-          return (
-            <div key={index} className="mt-6">
-              {item.timeline.map((event, i) => (
-                <TimelineEvent key={i} year={event.year} event={event.event} />
-              ))}
-            </div>
-          );
-        } else if (item.bio) {
-          return <BioCard key={index} bio={item.bio} />;
-        }
-      }
-      return (
-        <p key={index} className="mb-4 text-gray-700 leading-relaxed">
-          {item}
-        </p>
-      );
-    });
-  };
-
-  // Icon mapping
-  const getIcon = (title) => {
-    const iconMap = {
-      "¿Quiénes somos?": faBuilding,
-      "Nuestra oferta académica": faBookOpen,
-      Mision: faBullseye,
-      Vision: faEye,
-      "Nuestra Historia": faHistory,
-      "Gilda Liliana Ballivián Rosado": faUserGraduate,
-    };
-    return iconMap[title] || faLightbulb;
-  };
-
-  // Title mapping
-  const getPageTitle = () => {
-    const titles = {
-      info: "Conoce Nuestra Institución",
-      "mission-vision": "Nuestra Misión y Visión",
-      history: "Nuestra Historia",
-    };
-    return titles[infoType] || "Sobre Nosotros";
-  };
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-5xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-          className="text-center mb-16"
-        >
-          <motion.h1
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 to-indigo-700 bg-clip-text text-transparent mb-4"
-          >
-            {getPageTitle()}
-          </motion.h1>
-          <motion.div
-            initial={{ width: 0 }}
-            animate={{ width: "120px" }}
-            transition={{ delay: 0.3, duration: 0.5 }}
-            className="h-1 bg-gradient-to-r from-blue-400 to-indigo-500 mx-auto rounded-full"
-          ></motion.div>
-        </motion.div>
-
-        <div className="grid grid-cols-1 gap-10">
-          {aboutUs.data.map((item, index) => (
-            <InfoCard key={index} icon={getIcon(item.title)} title={item.title}>
-              <div className="space-y-4">{renderContent(item.description)}</div>
-            </InfoCard>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-};
